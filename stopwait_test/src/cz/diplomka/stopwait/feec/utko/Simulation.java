@@ -131,6 +131,10 @@ public static void main(String[] args) throws IOException {
 			System.out.format("#%3d: %6d  |  ", j, receiver.getStats().getAttemptDistrib2()[j]);
 		}
 		System.out.println("");
+        
+		
+		//prodane syso
+		System.out.println("Cesta kompletna");
 		
 		
 /*		System.out.println("\n\tDistribution of info frames transmission attempts (#frame number: attempt count):");

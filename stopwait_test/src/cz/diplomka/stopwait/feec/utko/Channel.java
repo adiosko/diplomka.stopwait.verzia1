@@ -5,6 +5,8 @@ public class Channel {
 	private long 	dataRate;				//channel data rate (bits per second)
 	private long 	propDelay;				//propagation delay (microseconds)
 	
+	
+	
 	public Channel(double prob, long rate, long delay) {
 		bitErrProb = prob;
 		dataRate = rate;
@@ -38,4 +40,6 @@ public class Channel {
 		corrupt(f);
 		return f;
 	}
-}
+	
+	
+	}
