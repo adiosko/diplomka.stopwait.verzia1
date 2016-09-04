@@ -6,7 +6,8 @@ public class Channel {
 	private long 	propDelay;				//propagation delay (microseconds)
 	
 	
-	
+	//Popísanie parametrov triedy Channel, kde bitErrProb je pravdepodbnost chyb, data rate je prenosova rych
+	//lost a Delay je anstavenie hodnoty Delay == konstruktor triedy
 	public Channel(double prob, long rate, long delay) {
 		bitErrProb = prob;
 		dataRate = rate;
@@ -25,15 +26,20 @@ public class Channel {
 		return propDelay;
 	}
 	
+	
+	//metoda na vypocet pravdepodnosti chyby podla vztahu 1 - (1-pravdepodbnsotchyby * dlzka ramca)
 	public double getFrameErrorProbability(int frameLength) {
 		return 1.0 - Math.pow( (1.0 - bitErrProb), frameLength );
 	}
 	
+	
+	//metoda na vzniknutie chybneho ramca pre vygenerovanie random ramca a nastavenie chyby ramca
 	private void corrupt(Frame f) {
 		boolean errorOccured = Math.random() <= getFrameErrorProbability(f.getLength()) ? true : false;
 		f.setError(errorOccured);
 	}
 	/////////////////////////////////////check whether channel corrupts ACK frames!!!!!!!!!!!!!
+	//metoda na poskodenie ramca z triedy frame
 	public Frame transfer(Frame f) {
 //		if(f.getType() == Frame.ACK)
 //			return f;
