@@ -14,19 +14,6 @@ public class Channel {
 		propDelay = delay;
 	}
 	
-	public double getBitErrProb() {
-		return bitErrProb;
-	}
-	
-	public long getDataRate() {
-		return dataRate;
-	}
-	
-	public long getPropDelay() {
-		return propDelay;
-	}
-	
-	
 	//metoda na vypocet pravdepodnosti chyby podla vztahu 1 - (1-pravdepodbnsotchyby * dlzka ramca)
 	public double getFrameErrorProbability(int frameLength) {
 		return 1.0 - Math.pow( (1.0 - bitErrProb), frameLength );
@@ -45,6 +32,31 @@ public class Channel {
 //			return f;
 		corrupt(f);
 		return f;
+	}
+	
+	//getery a settery
+	public double getBitErrProb() {
+		return bitErrProb;
+	}
+	
+	public long getDataRate() {
+		return dataRate;
+	}
+	
+	public long getPropDelay() {
+		return propDelay;
+	}
+
+	public void setBitErrProb(double bitErrProb) {
+		this.bitErrProb = bitErrProb;
+	}
+
+	public void setDataRate(long dataRate) {
+		this.dataRate = dataRate;
+	}
+
+	public void setPropDelay(long propDelay) {
+		this.propDelay = propDelay;
 	}
 	
 	

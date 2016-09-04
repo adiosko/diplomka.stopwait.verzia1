@@ -9,6 +9,9 @@ public class Frame {
 	private int 	length;			//total frame length (bits)
 	private boolean hasError;		//is frame corrupted
 	
+	
+	//vygenerovanie konstruktoru ramca, bude popísané číslom, typom(INFO alebo ACK), dĺžkou a 
+	//typom či ej chybný alebo nie
 	public Frame(byte no, byte ty, int len) {
 		number = no;
 		type = ty;
@@ -16,10 +19,18 @@ public class Frame {
 		hasError = false;
 	}
 	
+	//metoda nastavi ramce na jeho označené číslo, typ a dĺžku
 	public Frame(Frame f) {
 		this(f.number, f.type, f.length);
 	}
 	
+	
+	//metóda nastaví rámec, že je problémový a uloží to do premennej hasError v metóde
+	public void setError(boolean err) {
+		hasError = err;
+	}
+	
+	//gettery a settery premenných triedy
 	public byte getNumber() {
 		return number;
 	}
@@ -36,7 +47,31 @@ public class Frame {
 		return hasError;
 	}
 	
-	public void setError(boolean err) {
-		hasError = err;
+	public boolean isHasError() {
+		return hasError;
+	}
+
+	public void setHasError(boolean hasError) {
+		this.hasError = hasError;
+	}
+
+	public static byte getInfo() {
+		return INFO;
+	}
+
+	public static byte getAck() {
+		return ACK;
+	}
+
+	public void setNumber(byte number) {
+		this.number = number;
+	}
+
+	public void setType(byte type) {
+		this.type = type;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
 	}
 }
