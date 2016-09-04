@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Input {
-	private long 	dataRate;			//channel data rate (bits per second)
-	private long 	propDelay;			//propagation delay (microseconds)
-	private long 	procTime;			//info frame processing time (microseconds)
-	private int 	ackFrameLength;		//d, acknowledgement frame length (bits)
-	private int 	infoFrameLength;	//d+i, info frame length (bits)
-	private byte 	lengthDistrib;		//information data length distribution (0=CONST or 1=EXP)
-	private double 	bitErrProb;			//probability of bit error (0.0 - <1.0)
-	private long 	timeOutPeriod;		//time out period (microseconds)
-	private int 	totalFrameNo;		//total number of frames to transfer
+	private long 	dataRate;			//nastavenie počtu b/s
+	private long 	propDelay;			//propagačné sppzdenie v mikrosekundách
+	private long 	procTime;			//process time pre info rámce (microseconds)
+	private int 	ackFrameLength;		//d, dĺžka ACK rámcov (bity)
+	private int 	infoFrameLength;	//d+i, dĺžka INFO rámcov (bity)
+	private byte 	lengthDistrib;		//distribúcia dlžky INFO rámcov (0=CONST or 1=EXP)
+	private double 	bitErrProb;			//pravdepodobnst chyby (0.0 - <1.0)
+	private long 	timeOutPeriod;		//tdlžka timeout periódy (microseconds)
+	private int 	totalFrameNo;		//počet rámcov na odoslanie
 	
 	public long getDataRate() {
 		return dataRate;
@@ -66,6 +66,8 @@ public class Input {
 		}
 	}
 	
+	
+	//metóda nastaví optimálne hodnoty na prenos rámca 
 	public void read() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -83,6 +85,9 @@ public class Input {
 			return;
 		}
 		
+		
+		//metoda na nastavenie data rate pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+		//b/s a ošetrenie problémov cez try catch
 		boolean inputOk = false;
 		while(!inputOk) {
 			System.out.print("Enter data rate in bits per second: ");
@@ -98,7 +103,8 @@ public class Input {
 				System.out.println("Invalid input!");
 			}
 		}
-		
+		// nastavenie propagation delay pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+		// a ošetrenie problémov cez try catch
 		inputOk = false;
 		while(!inputOk) {
 			System.out.print("Enter propagation delay in microseconds: ");
@@ -115,6 +121,8 @@ public class Input {
 			}
 		}
 		
+		//nastavenie info proces time v mikrosekundách  pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+		//a ošetrenie problémov cez try catch
 		inputOk = false;
 		while(!inputOk) {
 			System.out.print("Enter info frame processing time in microseconds: ");
@@ -131,6 +139,8 @@ public class Input {
 			}
 		}
 
+		//nastavenie dlzky ACK rámca v bitoch  pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+				//a ošetrenie problémov cez try catch
 		inputOk = false;
 		while(!inputOk) {
 			System.out.print("Enter acknowledgement frame length in bits: ");
@@ -147,6 +157,8 @@ public class Input {
 			}
 		}
 		
+		//nastavenie  dlžky INFO rámca v bitch pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+				//a ošetrenie problémov cez try catch
 		inputOk = false;
 		while(!inputOk) {
 			System.out.print("Enter info frame length in bits: ");
@@ -163,6 +175,8 @@ public class Input {
 			}
 		}
 		
+		//nastavenie pravdepodobnosti chyby  pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+				//a ošetrenie problémov cez try catch
 		inputOk = false;
 		while(!inputOk) {
 			double minErr = 1.0 / infoFrameLength;
@@ -180,6 +194,9 @@ public class Input {
 			}
 		}
 		
+		
+		//nastavenie doby timeoutu  pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+				//a ošetrenie problémov cez try catch
 		inputOk = false;
 		long minTimeOut = 2*propDelay + procTime + ackFrameLength*1000000 / dataRate + 1;
 		//+1 to account for truncating
@@ -200,6 +217,9 @@ public class Input {
 			}
 		}
 		
+		
+		//nastavenie 0 pre konstatny prenos a  1 pre exponencialny prenos ramcov  pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+				//a ošetrenie problémov cez try catch
 		inputOk = false;
 		while(!inputOk) {
 			System.out.print("Enter data length distribution type ('0' for constant, '1' for exponential): ");
@@ -216,6 +236,8 @@ public class Input {
 			}
 		}
 		
+		//nastavenie počtu rámcov na odoslanie  pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
+				//a ošetrenie problémov cez try catch
 		inputOk = false;
 		while(!inputOk) {
 			System.out.print("Enter total number of frames for transmission: ");
