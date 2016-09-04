@@ -1,9 +1,9 @@
 package cz.diplomka.stopwait.feec.utko;
 
 public class Receiver {
-	private byte expectedFrameNo;		//expected info frame number, mod2 (0 or 1)
-	private byte lastReceivedNo;		//last received frame number, mod2 (0 or 1)
-	private long procTime;				//info frame processing time (microseconds)
+	private byte expectedFrameNo;		//očakávané číslo rámca, mod2 (0 or 1)
+	private byte lastReceivedNo;		//poseldný prijatý rámec, mod2 (0 or 1)
+	private long procTime;				//INFO rámec čas spracovania (microseconds)
 	private int ackFrameLength;			//d, acknowledgement frame length (bits)
 	private FrameStats stats;			//receiver's frame statistics
 	

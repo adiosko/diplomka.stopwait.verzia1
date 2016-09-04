@@ -15,42 +15,7 @@ public class Input {
 	private long 	timeOutPeriod;		//tdlžka timeout periódy (microseconds)
 	private int 	totalFrameNo;		//počet rámcov na odoslanie
 	
-	public long getDataRate() {
-		return dataRate;
-	}
-	
-	public long getPropDelay() {
-		return propDelay;
-	}
-	
-	public long getProcTime() {
-		return procTime;
-	}
-	
-	public long getTimeOutPeriod() {
-		return timeOutPeriod;
-	}
-	
-	public double getBitErrProb() {
-		return bitErrProb;
-	}
-	
-	public int getAckFrameLength() {
-		return ackFrameLength;
-	}
-	
-	public int getInfoFrameLength() {
-		return infoFrameLength;
-	}
-	
-	public byte getLengthDistrib() {
-		return lengthDistrib;
-	}
-	
-	public int getTotalFrameNo() {
-		return totalFrameNo;
-	}
-	
+	//metóda na vypýtanie sa chcete optimálny rámec alebo si ho nastavíte sami?
 	public boolean calculateOptLength() throws IOException {
 		while(true) {
 			System.out.println("\nDo you want to calculate optimal info frame length? ('y' or 'n'): ");
@@ -251,7 +216,7 @@ public class Input {
 				}
 			}catch(NumberFormatException e){
 				System.out.println("Invalid input!");
-			}
+			}}
 		}
 		
 /*		inputOk = false;
@@ -269,5 +234,91 @@ public class Input {
 			else
 				System.out.println("Invalid input!");
 		} */
+	
+	
+	
+	
+
+
+	//gettery a settery
+	public long getDataRate() {
+		return dataRate;
 	}
+	
+	public long getPropDelay() {
+		return propDelay;
+	}
+	
+	public long getProcTime() {
+		return procTime;
+	}
+	
+	public long getTimeOutPeriod() {
+		return timeOutPeriod;
+	}
+	
+	public double getBitErrProb() {
+		return bitErrProb;
+	}
+	
+	public int getAckFrameLength() {
+		return ackFrameLength;
+	}
+	
+	public int getInfoFrameLength() {
+		return infoFrameLength;
+	}
+	
+	public byte getLengthDistrib() {
+		return lengthDistrib;
+	}
+	
+	public int getTotalFrameNo() {
+		return totalFrameNo;
+	}
+	
+	public void setDataRate(long dataRate) {
+		this.dataRate = dataRate;
+	}
+
+
+	public void setPropDelay(long propDelay) {
+		this.propDelay = propDelay;
+	}
+
+
+	public void setProcTime(long procTime) {
+		this.procTime = procTime;
+	}
+
+
+	public void setAckFrameLength(int ackFrameLength) {
+		this.ackFrameLength = ackFrameLength;
+	}
+
+
+	public void setInfoFrameLength(int infoFrameLength) {
+		this.infoFrameLength = infoFrameLength;
+	}
+
+
+	public void setLengthDistrib(byte lengthDistrib) {
+		this.lengthDistrib = lengthDistrib;
+	}
+
+
+	public void setBitErrProb(double bitErrProb) {
+		this.bitErrProb = bitErrProb;
+	}
+
+
+	public void setTimeOutPeriod(long timeOutPeriod) {
+		this.timeOutPeriod = timeOutPeriod;
+	}
+
+
+	public void setTotalFrameNo(int totalFrameNo) {
+		this.totalFrameNo = totalFrameNo;
+	}
+	
 }
