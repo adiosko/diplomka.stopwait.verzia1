@@ -18,8 +18,11 @@ public static void main(String[] args) throws IOException {
 		Sender sender = new Sender(input.getTotalFrameNo(), input.getTimeOutPeriod(), input.getAckFrameLength(), input.getInfoFrameLength(), input.getLengthDistrib());
 		//receiver nastaví počet rámcov na prijatie, 
 		Receiver receiver = new Receiver(input.getTotalFrameNo(), input.getProcTime(), input.getAckFrameLength());
+		//vytvorenie štatistík
 		TimeStats time = new TimeStats();
-
+		
+		//výpis šírky pásma, delay, čas spracovania dát receivera, počet prijatých ACK rámcov (počet bitov) receivera,
+		//počet prijatých INFO rámcov (počet bitov) receivera, dňlžku distribúcie rámcov sendera, prvadepodobnosť chyby kanálu, počet prijatých rámcov a spracovaný čas
 		System.out.println("\nData rate is \t\t\t\t\t" + channel.getDataRate() + " bps.");
 		System.out.println("Propagation delay is \t\t\t\t" + channel.getPropDelay() + " microseconds.");
 		System.out.println("Info frame pocessing time is \t\t\t" + receiver.getProcTime() + " microseconds.");
@@ -32,6 +35,7 @@ public static void main(String[] args) throws IOException {
 		System.out.println("Elapsed time is \t\t\t\t" + time.getElapsedTime() + " microseconds.");
 
 		
+		//totalFrames si vypýta počet rámcov sendera vytvorí rámec f a pozoruje všetky rámce, ak je rámec OK  
 		int i = 0;
 		int totalFrames = sender.getStats().getTotalFrameNo();
 		Frame f;
@@ -39,6 +43,7 @@ public static void main(String[] args) throws IOException {
 		boolean ackOk = true;	//in order to send new frame, and not do a resend
 		long timeToAdd;
 		
+		//rámec po prijatí získa štatistiky a vytvorí nový rámec ak je rámec timeoutovaný resend inak vytvorí nový rámec a odošle ho kanálom
 		receiver.getStats().nextFrame();
 		/////////////////////////(check whether sender, after receiving bad ack, immediately resends, or waits for time out)
 		while(i < totalFrames) {
@@ -48,7 +53,7 @@ public static void main(String[] args) throws IOException {
 				f = sender.takeNewFrame();	//send a new frame
 				f = sender.send(f);
 			}
-			
+			//táto časť kódu pridá senderu dňlžku a datarate  a odošle rámec
 			timeToAdd = sender.frameTransTime(f.getLength(), channel.getDataRate());
 			time.add(timeToAdd);
 			
@@ -62,6 +67,7 @@ public static void main(String[] args) throws IOException {
 			timeToAdd = receiver.getProcTime();
 			time.add(timeToAdd);
 			
+			//táto časť kódu má na starosti, že ak je rámec špatný, pridelí mu timeout, inak mu anstaví paramtre a príjme rámec na strane receivera
 			if(corrupted) {
 				//don't send ack, make sender time-out
 				sender.timeOut();
