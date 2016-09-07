@@ -7,10 +7,16 @@ import java.io.InputStreamReader;
 public class Simulation {
 public static void main(String[] args) throws IOException {
 		
+		//Pridanie inputu (vypýta si či chceme defaultne hodnoty rámca alebo custom hodnoty)
 		Input input = new Input();
 		input.read();
+		
+		//vytvorenie kanálu s probability datarate a delay z inputu
 		Channel channel = new Channel(input.getBitErrProb(), input.getDataRate(), input.getPropDelay());
+		
+		//sender nastaví číslo rámca, timeout periodu, dlžku ACK rámcu a INFO rámcu s ich dňlžkou
 		Sender sender = new Sender(input.getTotalFrameNo(), input.getTimeOutPeriod(), input.getAckFrameLength(), input.getInfoFrameLength(), input.getLengthDistrib());
+		//receiver nastaví počet rámcov na prijatie, 
 		Receiver receiver = new Receiver(input.getTotalFrameNo(), input.getProcTime(), input.getAckFrameLength());
 		TimeStats time = new TimeStats();
 
