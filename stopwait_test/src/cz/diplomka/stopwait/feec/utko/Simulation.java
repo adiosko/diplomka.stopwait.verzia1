@@ -57,6 +57,7 @@ public static void main(String[] args) throws IOException {
 			timeToAdd = sender.frameTransTime(f.getLength(), channel.getDataRate());
 			time.add(timeToAdd);
 			
+			//transmit skor
 			f = channel.transfer(f);
 			
 			timeToAdd = channel.getPropDelay();

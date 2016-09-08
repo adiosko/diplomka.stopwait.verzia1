@@ -37,7 +37,7 @@ public class TimeStats {
 		System.out.format("\tTheoretical throughput:\t %05.2f%%%n", throughputTheor * 100);
 	}
 	
-	//výpočet optimálnej dĺžky rámca, na základe prijatej pravdepodbnosti erroru
+	//výpočet optimálnej dĺžky rámca, na základe prijatej pravdepodbnosti erroru skusit 64 512 1280 1500
 	public int optInfoLength(Input in) {
 		return 8192;
 	}

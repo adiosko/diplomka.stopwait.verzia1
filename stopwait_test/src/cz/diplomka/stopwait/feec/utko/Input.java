@@ -50,7 +50,7 @@ public class Input {
 			return;
 		}
 		
-		
+		//NOT set bit rate
 		//metoda na nastavenie data rate pri zadaní aby metóda nenastavila optimálne hodnoty, nastavenie
 		//b/s a ošetrenie problémov cez try catch
 		boolean inputOk = false;
